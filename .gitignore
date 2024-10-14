@@ -1,0 +1,11 @@
+#Q; add swahili.py to .gitignore
+
+swahili.py
+
+trial.csv
+
+trial2.csv
+
+words.csv
+
+swahili.db
