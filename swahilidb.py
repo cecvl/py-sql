@@ -1,22 +1,10 @@
 from cs50 import SQL
 import pandas as pd;
-db = SQL("sqlite:///swahili.db")
+db = SQL("sqlite:///test.db")
 
-#Q: import specific columns from a csv files
-# A: pd.read_csv('file.csv', usecols=['column1', 'column2'])
-#Q: read the columns from csv file to a database
-# A: df.to_sql('table_name', con=engine)
-# Q: explain con=engine
-# A: con=engine is the connection to the database
-# Q: how do you create a connection to a database
-# A: engine = create_engine('sqlite:///database.db')
-# Q: clear a database tables
+db.execute("CREATE TABLE words (id INT AUTO_INCREMENT PRIMARY KEY,word VARCHAR(255) NOT NULL UNIQUE, meaning TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)")
 
-#Q: table with six fields
-# A: CREATE TABLE IF NOT EXISTS users (name TEXT, age NUMBER
+db.execute("CREATE TABLE synonyms (id INT AUTO_INCREMENT PRIMARY KEY,word_id INT, synonym VARCHAR(255) , FOREIGN KEY (word_id) REFERENCES words(id) ON DELETE CASCADE)")
 
+db.execute("CREATE TABLE conjugations (id INT AUTO_INCREMENT PRIMARY KEY,word_id INT, conjugation VARCHAR(255) , FOREIGN KEY (word_id) REFERENCES words(id) ON DELETE CASCADE)")
 
-#Q: copy data from an original csv with specific columns only
-#A: 
-people = db.execute("SELECT * FROM words")
-print(people)
